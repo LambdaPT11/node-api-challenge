@@ -21,6 +21,8 @@ router.get('/', async (req, res) => {
     // res.status(200).json({ msg: 'get/ api/project here' });
 });
 
+// api/project/id
+// GET with id
 router.get('/:id', async (req, res) => {
     const { id } = req.params
     try {
@@ -33,9 +35,9 @@ router.get('/:id', async (req, res) => {
 });
 
 // api/project
+// POST a new project, don't pass id
 router.post('/', async (req, res) => {
     const project = req.body
-    
     
     try {
         await model.insert(project)
@@ -43,6 +45,21 @@ router.post('/', async (req, res) => {
     } catch(err) {
         console.error(err.message);
         return res.status(500).json({ err: 'post issue for project' });
+    }
+});
+
+// api/project/id
+// PUT to update a project
+router.put('/:id', (req, res) => {
+    const { id } = req.params
+    const changes = req.body
+
+    try {
+        model.update(id, changes)
+        res.status(200).json({ msg: 'updated project', changes })
+    } catch(err) {
+        console.error(err.message)
+        return res.status(500).json({ err: 'put issue for project' });
     }
 });
 
