@@ -9,6 +9,7 @@ const model = require('../data/helpers/projectModel');
 // Delete - DELETE (model - remove)
 
 // api/project
+// call getall() to review all projects. This was the only way I could see to get the id
 router.get('/', async (req, res) => {
     try {
         projects = await model.getall()
@@ -18,6 +19,17 @@ router.get('/', async (req, res) => {
         return res.status(500).json({ err: 'get issue for project' });
     }
     // res.status(200).json({ msg: 'get/ api/project here' });
+});
+
+router.get('/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        project = await model.get(id)
+        res.status(200).json(project)
+    } catch(err) {
+        console.error(err.message);
+        return res.status(500).json({ err: 'get issue for project' });
+    }
 });
 
 // api/project
