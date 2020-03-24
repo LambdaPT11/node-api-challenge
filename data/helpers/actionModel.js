@@ -3,10 +3,15 @@ const mappers = require("./mappers");
 
 module.exports = {
   get,
+  getall,
   insert,
   update,
   remove,
 };
+
+function getall() {
+  return db("actions");
+}
 
 function get(id) {
   let query = db("actions");
