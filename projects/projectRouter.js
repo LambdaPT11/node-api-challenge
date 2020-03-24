@@ -80,17 +80,12 @@ router.delete('/:id', async (req, res) => {
 // api/project/project_id:id
 // return a project id
 router.get('/project_id/:id', async (req, res) => {
-    const { id } = req.params
 
     try {
-        const getaction = await model.getProjectActions(id)
-        const getproject = await model.get(id)
-        
-        if (getaction == getproject) {
+        await model.getProjectActions(req.params)
+       
             res.status(200).json({ msg: 'project_id' })
-        } else {
-            res.status(400).json({ msg: 'no action found' })
-        }
+     
         
     } catch(err) {
         console.error(err.message)
