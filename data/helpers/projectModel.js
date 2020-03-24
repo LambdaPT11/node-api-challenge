@@ -11,7 +11,7 @@ module.exports = {
 };
 
 function getall() {
-   return db('projects');
+   return db("projects");
 }
 
 function get(id) {

@@ -11,13 +11,13 @@ const model = require('../data/helpers/projectModel');
 // api/project
 router.get('/', async (req, res) => {
     try {
-        await model.getall()
-        res.status(200).json(projects);
+        projects = await model.getall()
+        return res.status(200).json(projects);
     } catch(err) {
         console.error(err.message);
         return res.status(500).json({ err: 'get issue for project' });
     }
-    res.status(200).json({ msg: 'get/ api/project here' });
+    // res.status(200).json({ msg: 'get/ api/project here' });
 });
 
 // api/project
